@@ -1,0 +1,23 @@
+{
+  "name": "webshop",
+  "version": "1.0.0",
+  "description": "eCommerce App which built with MERN Stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnnhack/webshop.git"
+  },
+  "author": "hnnhack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hnnhack/webshop/issues"
+  },
+  "homepage": "https://github.com/hnnhack/webshop#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
