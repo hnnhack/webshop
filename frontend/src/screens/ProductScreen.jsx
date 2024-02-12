@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
+import axios from 'axios'
 import Rating from '../components/Rating'
-import products from '../products'
 
 const ProductScreen = () => {
+  const [ product, setProduct ] = useState([])
   const { id: productId } = useParams()
-  const product = products.find( p => p._id === productId )
-  console.log(product)
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`)
+      setProduct(data)
+    }
+    
+    fetchProducts()
+  }, [productId])
+  
+  // we have used it to fetch data from frontend
+
+  // import products from '../products'
+  
+  // const product = products.find( p => p._id === productId )
+  // console.log(product)
 
   return (
     <>
