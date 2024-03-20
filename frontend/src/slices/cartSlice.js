@@ -7,7 +7,7 @@ const addDecimals = (num) => {
 }
 
 const cartSlice = createSlice({
-  name: "Cart",
+  name: 'cart',
   initialState,
   reducer: {
     addToCart: (state, action) => {
@@ -20,26 +20,26 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item]
       }
 
-      // calculate items price (if total order is geater than €100 €0 else €10)
+      // calculate items price 
       state.itemsPrice = addDecimals(
         state.cartItems.reduce(
           (acc, item) => acc + item.price * item.qty, 0
           )
         )
 
-      // calculate shipping price
+      // calculate shipping price (if total order is geater than €100 €0.00 else €7.00)
       state.shippingPrice = addDecimals(
-        state.itemsPrice > 100 ? 0 : 10
+        state.itemsPrice > 100 ? 0.00 : 7.00
         )
 
-      // calculate tax price (itemPrice * 0,21)
+      // calculate tax price ( 21% tax )
       state.taxPrice = addDecimals(
         Number(
           ( 0.21 * state.itemsPrice).toFixed(2)
         ))
 
       // calculate total price
-      state.totalPrice = addDecimals(
+      state.totalPrice = (
         Number(state.itemsPrice) + 
         Number(state.shippingPrice) + 
         Number(state.taxPrice)
@@ -50,6 +50,6 @@ const cartSlice = createSlice({
   }
 })
 
-export const addToCart = cartSlice.actions
+export const { addToCart } = cartSlice.actions
 
 export default cartSlice.reducer
