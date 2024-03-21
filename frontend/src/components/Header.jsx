@@ -1,10 +1,14 @@
 import React from 'react'
-import { Nav, Navbar, Container } from 'react-bootstrap'
+import { Nav, Navbar, Container, Badge } from 'react-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useSelector } from 'react-redux';
 import logo from '../assets/logo.png'
 
 const Header = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+  const { cart } = localStorage
+  console.log(JSON.parse(cart).itemsPrice)
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
@@ -16,7 +20,16 @@ const Header = () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               <LinkContainer to='/cart'>
-                <Nav.Link><FaShoppingCart /> Cart</Nav.Link>
+                <Nav.Link><FaShoppingCart /> Cart
+                  {cartItems.length > 0 && (
+                    <Badge pill bg='success' style={{ marginLeft: '5px' }}>
+                      {
+                        cartItems.reduce((acc, current) => acc + current.qty, 0)
+                        // '€ '+JSON.parse(cart).itemsPrice
+                      }
+                    </Badge>
+                  )}
+                </Nav.Link>
               </LinkContainer>
               <LinkContainer to='/login'>
                 <Nav.Link><FaUser /> Sign In</Nav.Link>
