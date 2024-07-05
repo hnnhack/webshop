@@ -8,6 +8,7 @@ import logo from '../assets/logo.png'
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { cart } = localStorage
+  if (cart)
   console.log(JSON.parse(cart).itemsPrice)
   return (
     <header>
